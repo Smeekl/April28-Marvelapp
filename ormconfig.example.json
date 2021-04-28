@@ -1,0 +1,19 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "1111",
+  "database": "marvelapp",
+  "synchronize": true,
+  "logging": true,
+  "entities": [
+    "entities/*.entity{.ts,.js}"
+  ],
+  "cli": {
+    "entitiesDir": "entities/",
+    "migrationsDir": "migration/",
+    "subscribersDir": "src/subscriber"
+  },
+  "migrations": ["migration/*{.ts,.js}"]
+}
