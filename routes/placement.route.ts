@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.post("/", PlacementController.create);
 router.get("/", PlacementController.getAll);
+router.get("/:id", PlacementController.getById);
 
 module.exports = router;

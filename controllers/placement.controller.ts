@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
-import FamilyService from "../services/family.service";
-import { Placement } from "../entities/placement.entity";
 import PlacementService from "../services/placement.service";
-import CriteriaService from "../services/criteria.service";
 
 class PlacementController {
   private readonly placementService: PlacementService;
@@ -14,6 +11,16 @@ class PlacementController {
     try {
       const placements = await this.placementService.getAll();
       response.json(placements);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  public getById = async (request: Request, response: Response) => {
+    try {
+      const { id } = request.params;
+      const placement = await this.placementService.getById(+id);
+      response.json(placement);
     } catch (err) {
       console.log(err);
     }

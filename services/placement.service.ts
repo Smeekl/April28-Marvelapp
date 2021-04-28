@@ -9,9 +9,9 @@ class PlacementService {
     this.placementRepo = new PlacementRepository();
   }
 
-  public getAll = async () => {
-    return this.placementRepo.getAll();
-  };
+  public getAll = async () => this.placementRepo.getAll();
+
+  public getById = async (id: number) => this.placementRepo.getById(id);
 
   public create = async (placement: PlacementDto) => {
     const placementInstance = new Placement(placement);

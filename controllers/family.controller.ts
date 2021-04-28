@@ -23,12 +23,11 @@ class FamilyController {
   public create = async (request: Request, response: Response) => {
     try {
       const { name, country, criteria } = request.body;
-      const criteriaList = await this.criteriaService.criterionList(criteria);
 
       await this.familyService.create({
         name,
         country,
-        criteria: criteriaList,
+        criteria,
       });
       response.status(200).send();
     } catch (e) {
