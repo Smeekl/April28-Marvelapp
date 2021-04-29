@@ -3,6 +3,7 @@ import Repository from "../interfaces/repository.interface";
 import { Criteria } from "../entities/criteria.entity";
 import { Family } from "../entities/family.entity";
 import FamilyDto from "../dtos/family.dto";
+import { createQueryBuilder } from "typeorm";
 
 export class FamilyRepository implements Repository<Family> {
   public async getById(id: number): Promise<Family> {
@@ -10,7 +11,10 @@ export class FamilyRepository implements Repository<Family> {
   }
 
   public async getAll(): Promise<Family[]> {
-    return (await connection).getRepository(Family).find();
+    return await createQueryBuilder(Family, "family")
+      .leftJoinAndSelect("family.familyToCriteria", "familyToCriteria")
+      .leftJoinAndSelect("familyToCriteria.criteria", "criteria")
+      .getMany();
   }
 
   public async getByName(name: string): Promise<Family> {

@@ -2,6 +2,7 @@ import { connection } from "../app";
 import Repository from "../interfaces/repository.interface";
 import PlacementDto from "../dtos/placement.dto";
 import { Placement } from "../entities/placement.entity";
+import { getRepository } from "typeorm";
 
 export class PlacementRepository implements Repository<Placement> {
   public async getById(id: number): Promise<Placement> {
@@ -9,7 +10,7 @@ export class PlacementRepository implements Repository<Placement> {
   }
 
   public async getAll(): Promise<Placement[]> {
-    return (await connection).getRepository(Placement).find();
+    return getRepository(Placement).find({ relations: ["match"] });
   }
 
   public async getByName(name: string): Promise<Placement> {

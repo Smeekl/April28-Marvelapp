@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import PlacementDto from "../dtos/placement.dto";
+import { Family } from "./family.entity";
 
 @Entity("placement")
 export class Placement {
@@ -24,6 +27,10 @@ export class Placement {
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   arrived: Date;
+
+  @ManyToMany(() => Family)
+  @JoinTable()
+  match: Family[];
 
   @CreateDateColumn()
   createdAt: Date;

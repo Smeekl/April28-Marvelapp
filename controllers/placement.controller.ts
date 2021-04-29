@@ -40,5 +40,15 @@ class PlacementController {
       console.log(e);
     }
   };
+
+  public match = async (request: Request, response: Response) => {
+    try {
+      const { match, id } = request.body;
+      await this.placementService.match(match, +id);
+      response.status(200).send();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 }
 export default new PlacementController();

@@ -1,7 +1,7 @@
-import { connection } from "../app";
 import { Criteria } from "../entities/criteria.entity";
 import CriteriaRepository from "../repositories/criteria.repository";
 import CriteriaDto from "../dtos/criteria.dto";
+import { createQueryBuilder } from "typeorm";
 
 class CriteriaService {
   private readonly criteriaRepo: CriteriaRepository;
@@ -24,8 +24,7 @@ class CriteriaService {
       return null;
     }
 
-    return (await connection)
-      .createQueryBuilder()
+    return await createQueryBuilder()
       .select("criteria")
       .from(Criteria, "criteria")
       .where("criteria.name IN (:...criteria)", { criteria })
